@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Comic Neue";
+  src: url(./assets/fonts/ComicNeue-Regular.woff2);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #101010;
+  color: #fff;
+  font-family: "Comic Neue", cursive, sans-serif;
+}
