@@ -6,18 +6,19 @@ import Party from "../../assets/partying-face.png";
 
 const NavBar = () => {
   return (
-    <div className="navBar">
+    <div className="navBar align_center">
       <h1>Movie Maniac</h1>
-      <div className="navbar_links">
+      <div className="navbar_links align_center">
         {/* <div>mode</div> */}
         <a href="">
-          <img src={Fire} alt="fire emoji"></img>Popular
+          <img src={Fire} alt="fire emoji" className="navbar_emoji"></img>
+          Popular
         </a>
         <a href="">
-          <img src={Star}></img> Top Rated
+          <img src={Star} className="navbar_emoji"></img> Top Rated
         </a>
         <a href="">
-          <img src={Party}></img>Upcoming
+          <img src={Party} className="navbar_emoji"></img>Upcoming
         </a>
       </div>
     </div>

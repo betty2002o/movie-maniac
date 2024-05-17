@@ -13,3 +13,8 @@ body {
   color: #fff;
   font-family: "Comic Neue", cursive, sans-serif;
 }
+
+.align_center {
+  display: flex;
+  align-items: center;
+}
