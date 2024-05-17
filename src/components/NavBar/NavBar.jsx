@@ -11,13 +11,13 @@ const NavBar = () => {
       <div className="navbar_links">
         {/* <div>mode</div> */}
         <a href="">
-          Popular <img src={Fire} alt="fire emoji"></img>
+          <img src={Fire} alt="fire emoji"></img>Popular
         </a>
         <a href="">
-          Top Rated <img src={Star}></img>
+          <img src={Star}></img> Top Rated
         </a>
         <a href="">
-          Upcoming <img src={Party}></img>
+          <img src={Party}></img>Upcoming
         </a>
       </div>
     </div>

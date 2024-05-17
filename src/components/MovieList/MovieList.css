@@ -1,0 +1,26 @@
+.movie_list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.movie_filters {
+  padding-right: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movie_filters > a {
+  margin-right: 17px;
+  color: white;
+  text-decoration: none;
+}
+
+.movie_filters > a:hover {
+  border-bottom: white solid 1px;
+}
+
+.movie_filters > select {
+  margin-right: 10px;
+}
