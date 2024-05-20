@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
+import FilteredGroup from "./FilteredGroup";
 import "./MovieList.css";
 import "../NavBar/NavBar.css";
 import Fire from "../../assets/fire.png";
 
 const MovieList = () => {
   const [movieLists, setMovieLists] = useState([]);
-  // const api_key = `${process.env.REACT_APP_TMDB_API_KEY}`;
-  // console.log(api_key);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [movieRating, setMovieRating] = useState(0);
   useEffect(() => {
     fetchMovies();
   }, []);
@@ -35,8 +36,22 @@ const MovieList = () => {
       }
       const data = await response.json();
       setMovieLists(data.results);
+      setFilteredMovies(data.results);
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
+    }
+  };
+
+  const handleRatingFilter = (rating) => {
+    if (movieRating == rating) {
+      setFilteredMovies(movieLists);
+      setMovieRating(0);
+    } else {
+      const filteredMovie = movieLists.filter(
+        (x) => x.vote_average.toFixed(1) >= rating
+      );
+      setFilteredMovies(filteredMovie);
+      setMovieRating(rating);
     }
   };
 
@@ -48,11 +63,11 @@ const MovieList = () => {
           Popular <img src={Fire} alt="fire emoji" className="navbar_emoji" />
         </h2>
         <div className="movie_filters_fs align_center">
-          <ul className="movie_filter align_center">
-            <li className="movie_filter_item">8+Stars</li>
-            <li className="movie_filter_item">7+Stars</li>
-            <li className="movie_filter_item">6+Stars</li>
-          </ul>
+          <FilteredGroup
+            ratings={[8, 7, 6]}
+            movieRating={movieRating}
+            handleRatingFilter={handleRatingFilter}
+          />
 
           <select name="" className="movie_sorting">
             <option value="">SortBy</option>
@@ -66,7 +81,7 @@ const MovieList = () => {
         </div>
       </header>
       <div className="movie_cards">
-        {movieLists.map((movie) => (
+        {filteredMovies.map((movie) => (
           <MovieCard key={movie.id} movie={movie} />
         ))}
       </div>

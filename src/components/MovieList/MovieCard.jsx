@@ -3,7 +3,6 @@ import Star from "../../assets/glowing-star.png";
 import "./MovieCard.css";
 
 const MovieCard = ({ movie }) => {
-  console.log(movie);
   const roundedVoteAverage = movie.vote_average.toFixed(1);
   return (
     <a
