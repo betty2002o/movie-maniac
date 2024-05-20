@@ -6,7 +6,7 @@ import "./MovieList.css";
 import "../NavBar/NavBar.css";
 import Fire from "../../assets/fire.png";
 
-const MovieList = () => {
+const MovieList = ({ type, title, emoji }) => {
   const [movieLists, setMovieLists] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [movieRating, setMovieRating] = useState(0);
@@ -27,23 +27,16 @@ const MovieList = () => {
     }
   }, [movieSort]);
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyZGEyYjBhMDM1NDU3MTFhMjZjYzA1YWQ5Mzc4YTVmYiIsInN1YiI6IjY2NDgyMzUwNjQ3YTFlMDMxNmYyMzYyMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.A71E9XKwmm5CQdUNble24a5F3p9D3eg8rxlyXcJz-hk",
-    },
-  };
-
   const fetchMovies = async () => {
     try {
-      const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+      // const apiKey = import.meta.env.VITE_TMDB_API_KEY;
+      const apiKey = `2da2b0a03545711a26cc05ad9378a5fb`;
+
       if (!apiKey) {
         throw new Error("API key is missing");
       }
       const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
+        `https://api.themoviedb.org/3/movie/${type}?api_key=${apiKey}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok" + response.statusText);
@@ -72,14 +65,13 @@ const MovieList = () => {
     const { name, value } = e.target;
     setMovieSort((prev) => ({ ...prev, [name]: value }));
   };
-  console.log("movieSort", movieSort);
 
   return (
-    <section className="movie_list">
+    <section className="movie_list" id={type}>
       <header className="movie_filters_header align_center">
         <h2 className="align_center movie_list_heading">
-          {" "}
-          Popular <img src={Fire} alt="fire emoji" className="navbar_emoji" />
+          {title}
+          <img src={emoji} alt={`${emoji} icon`} className="navbar_emoji" />
         </h2>
         <div className="movie_filters_fs align_center">
           <FilteredGroup

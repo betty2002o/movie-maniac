@@ -2,6 +2,14 @@
   justify-content: space-between;
   padding: 0 30px;
   border-bottom: 1px solid #e6e6e6;
+  position: fixed;
+  height: 50px;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+.navBar > h1 {
+  color: var(--heading_color);
 }
 
 .navbar_links > a {
@@ -9,7 +17,7 @@
   justify-content: space-evenly;
   align-items: center;
   text-decoration: none;
-  color: white;
+  color: var(--body_color);
   font-size: 16px;
   font-weight: 500;
   padding: 0 15px;

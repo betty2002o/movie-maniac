@@ -1,6 +1,11 @@
 .movie_list {
   display: flex;
   flex-direction: column;
+  padding-top: 60px;
+}
+
+.movie_list_heading {
+  color: var(--body_color);
 }
 
 .movie_filters_header {
@@ -18,6 +23,7 @@
 .movie_filter_item {
   padding: 5px 10px;
   cursor: pointer;
+  color: var(--body_color);
 }
 
 .movie_filter_item.active {
