@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import _ from "lodash";
 import MovieCard from "./MovieCard";
 import FilteredGroup from "./FilteredGroup";
 import "./MovieList.css";
@@ -9,9 +10,22 @@ const MovieList = () => {
   const [movieLists, setMovieLists] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [movieRating, setMovieRating] = useState(0);
+  const [movieSort, setMovieSort] = useState({ by: "default", order: "asc" });
+
   useEffect(() => {
     fetchMovies();
   }, []);
+
+  useEffect(() => {
+    if (movieSort.by !== "default") {
+      const sortedMovie = _.orderBy(
+        filteredMovies,
+        [movieSort.by],
+        [movieSort.order]
+      );
+      setFilteredMovies(sortedMovie);
+    }
+  }, [movieSort]);
 
   const options = {
     method: "GET",
@@ -54,6 +68,11 @@ const MovieList = () => {
       setMovieRating(rating);
     }
   };
+  const handleSort = (e) => {
+    const { name, value } = e.target;
+    setMovieSort((prev) => ({ ...prev, [name]: value }));
+  };
+  console.log("movieSort", movieSort);
 
   return (
     <section className="movie_list">
@@ -69,14 +88,24 @@ const MovieList = () => {
             handleRatingFilter={handleRatingFilter}
           />
 
-          <select name="" className="movie_sorting">
-            <option value="">SortBy</option>
-            <option value="">Date</option>
-            <option value="">Rating</option>
+          <select
+            name="by"
+            className="movie_sorting"
+            value={movieSort.by}
+            onChange={handleSort}
+          >
+            <option value="default">SortBy</option>
+            <option value="release_date">Date</option>
+            <option value="vote_average">Rating</option>
           </select>
-          <select name="" className="movie_sorting">
-            <option value="">Ascending</option>
-            <option value="">Descending</option>
+          <select
+            name="order"
+            value={movieSort.order}
+            className="movie_sorting"
+            onChange={handleSort}
+          >
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
           </select>
         </div>
       </header>
